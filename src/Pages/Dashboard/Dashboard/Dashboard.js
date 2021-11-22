@@ -29,6 +29,7 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
 import useAuth from './../../../hooks/useAuth'
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import Payment from '../Payment/Payment';
 
 const drawerWidth = 200;
 
@@ -46,6 +47,7 @@ function Dashboard({ window }) {
             <Divider />
             <NavLink style={{ textDecoration: 'none', color: 'black' }} to="/appointment"><Button color="inherit" variant="contained">Appointment</Button></NavLink>
             <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}`}><Button color="inherit" variant="contained">Dashboard</Button></NavLink>
+            {/* <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}/payment`}><Button color="inherit" variant="contained">Payment</Button></NavLink> */}
             {admin &&
                 <Box>
                     <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}/makeAdmin`}><Button color="inherit" variant="contained">Make Admin</Button></NavLink>
@@ -133,12 +135,16 @@ function Dashboard({ window }) {
                     <Route exact path={path}>
                         <DashboardHome></DashboardHome>
                     </Route>
+                    <Route path={`${path}/payment/:appointmentId`}>
+                        <Payment></Payment>
+                    </Route>
                     <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>
                     </AdminRoute>
                     <AdminRoute path={`${path}/addDoctor`}>
                         <AddDoctor></AddDoctor>
                     </AdminRoute>
+
                 </Switch>
             </Box>
         </Box>

@@ -20,7 +20,7 @@ const style = {
 };
 
 const BookingModal = ({ bookingOpen, handleBookingClose, booking, date, setBookingSuccess }) => {
-    const { name, time } = booking;
+    const { name, time, price } = booking;
     const { user } = useAuth();
     const initialInfo = { patientName: user.displayName, email: user.email, phone: '' }
     const [bookingInfo, setBookingInfo] = useState(initialInfo);
@@ -39,13 +39,14 @@ const BookingModal = ({ bookingOpen, handleBookingClose, booking, date, setBooki
         // collect data
         const appointment = {
             ...bookingInfo,
+            price,
             time,
             serviceName: name,
             date: date.toLocaleDateString()
 
         }
         // send to the server
-        fetch('https://damp-stream-51335.herokuapp.com/appointments', {
+        fetch('https://sheltered-shelf-92236.herokuapp.com/appointments', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

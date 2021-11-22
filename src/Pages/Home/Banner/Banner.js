@@ -7,6 +7,7 @@ import { Box } from '@mui/system';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CallIcon from '@mui/icons-material/Call';
+import { Link } from 'react-router-dom';
 
 const bannerBg = {
     background: `url(${bg})`
@@ -34,7 +35,7 @@ const Banner = () => {
                         <Typography variant="h6" sx={{ my: 3, fontSize: 13, fontWeight: 300, color: 'grey' }}>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ratione consectetur omnis nihil aut. Recusandae placeat eius qui sit dolor.
                         </Typography>
-                        <Button variant="contained" sx={{ backgroundColor: 'rgb(24,210,187)' }}>Get Appointment</Button>
+                        <Link style={{ textDecoration: 'none' }} to="/appointment"><Button variant="contained" sx={{ backgroundColor: 'rgb(24,210,187)' }}>Get Appointment</Button></Link>
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={6} style={verticalCenter}>

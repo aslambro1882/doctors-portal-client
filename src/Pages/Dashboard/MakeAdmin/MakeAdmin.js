@@ -12,7 +12,7 @@ const MakeAdmin = () => {
     }
     const handleAdminSubmit = e => {
         const user = { email }
-        fetch('https://damp-stream-51335.herokuapp.com/users/admin', {
+        fetch('https://sheltered-shelf-92236.herokuapp.com/users/admin', {
             method: "PUT",
             headers: {
                 'authorization': `Bearer ${token}`,
