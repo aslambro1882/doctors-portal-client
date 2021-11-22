@@ -18,24 +18,16 @@ import {
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
-import DashboardHome from '../DashboardHome/DashboardHome';
 import {
-    Switch,
-    Route,
     NavLink,
-    useRouteMatch
+    Outlet
 } from "react-router-dom";
-import MakeAdmin from '../MakeAdmin/MakeAdmin';
-import AddDoctor from '../AddDoctor/AddDoctor';
 import useAuth from './../../../hooks/useAuth'
-import AdminRoute from '../../Login/AdminRoute/AdminRoute';
-import Payment from '../Payment/Payment';
 
 const drawerWidth = 200;
 
 function Dashboard({ window }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    let { path, url } = useRouteMatch();
     const { admin } = useAuth();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -46,12 +38,12 @@ function Dashboard({ window }) {
             <Toolbar />
             <Divider />
             <NavLink style={{ textDecoration: 'none', color: 'black' }} to="/appointment"><Button color="inherit" variant="contained">Appointment</Button></NavLink>
-            <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}`}><Button color="inherit" variant="contained">Dashboard</Button></NavLink>
+            <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/dashboard`}><Button color="inherit" variant="contained">Dashboard</Button></NavLink>
             {/* <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}/payment`}><Button color="inherit" variant="contained">Payment</Button></NavLink> */}
             {admin &&
                 <Box>
-                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}/makeAdmin`}><Button color="inherit" variant="contained">Make Admin</Button></NavLink>
-                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`${url}/addDoctor`}><Button color="inherit" variant="contained">Add Doctor</Button></NavLink>
+                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/dashboard/makeAdmin`}><Button color="inherit" variant="contained">Make Admin</Button></NavLink>
+                    <NavLink style={{ textDecoration: 'none', color: 'black' }} to={`/dashboard/addDoctor`}><Button color="inherit" variant="contained">Add Doctor</Button></NavLink>
                 </Box>
             }
             <List>
@@ -131,21 +123,7 @@ function Dashboard({ window }) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Switch>
-                    <Route exact path={path}>
-                        <DashboardHome></DashboardHome>
-                    </Route>
-                    <Route path={`${path}/payment/:appointmentId`}>
-                        <Payment></Payment>
-                    </Route>
-                    <AdminRoute path={`${path}/makeAdmin`}>
-                        <MakeAdmin></MakeAdmin>
-                    </AdminRoute>
-                    <AdminRoute path={`${path}/addDoctor`}>
-                        <AddDoctor></AddDoctor>
-                    </AdminRoute>
-
-                </Switch>
+                <Outlet />
             </Box>
         </Box>
     );
